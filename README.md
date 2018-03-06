@@ -17,4 +17,3 @@ pip install -r requirements.txt
 python ordinary_differential_equation.py
 
 ```
-Go to `localhost:3000`.
