@@ -1,0 +1,6 @@
+*.py~
+*.pyc
+*.pyo
+*.log
+.idea
+.venv
