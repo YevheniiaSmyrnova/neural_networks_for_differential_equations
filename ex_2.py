@@ -1,3 +1,6 @@
+"""
+2 layer
+"""
 import autograd.numpy as np
 from autograd import grad
 import autograd.numpy.random as npr

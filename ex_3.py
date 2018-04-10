@@ -1,5 +1,5 @@
 """
-2 layer
+3 layer
 """
 import autograd.numpy as np
 from autograd import grad
@@ -67,44 +67,42 @@ T = np.array(T)
 # output data
 X = []
 for i in range(0, n+1, 1):
-    X.append(analytic_solution(*T[i]))
+    X.append([analytic_solution(*T[i])])
 X = np.array(X)
-# print X
 
 np.random.seed(1)
 
 # 4 input and 1 output
-syn0 = 2 * np.random.random(4) - 1
-Q=[]
+syn0 = 2 * np.random.random((4, 5)) - 1
+syn1 = 2 * np.random.random((5, 1)) - 1
 
 iter_count = 100000
 while True:
-    Q=[]
-    er = 0
-    for i in range(1, n+1, 1):
 
-        l0 = T[i]
+    l0 = T
 
-        l1 = nonlin(np.dot(l0, syn0))
+    l1 = nonlin(np.dot(l0, syn0))
+    l2 = nonlin(np.dot(l1, syn1))
+    l2_error = (X - l2)**2
 
-        l1_error = (X[i] - l1)**2
+    if (iter_count % 10000) == 0:
+        print "Error:" + str(np.mean(np.abs(l2_error)))
 
-        l1_delta = l1_error * nonlin(l1, True)  # !!!
+    l2_delta = l2_error * nonlin(l2, deriv=True)
 
-        syn0 += 0.0002*np.dot(l0.T, l1_delta)  # !!!
+    l1_error = l2_delta.dot(syn1.T)
+    l1_delta = l1_error * nonlin(l1, deriv=True)
 
-        Q.append(l1)
-        er += l1_error
+    syn1 -= l1.T.dot(l2_delta)
+    syn0 -= l0.T.dot(l1_delta)
 
     iter_count -= 1
-    print iter_count, er, Q
+    print iter_count, np.mean(np.abs(l2_error)), l2
     if iter_count == 0:
         break
-    elif er <= 0.00000000002:
+    elif np.mean(np.abs(l2_error)) <= 0.00000000002:
         break
 
 
 print "Output:"
-print l1
-print Q
-print X
+print l2
