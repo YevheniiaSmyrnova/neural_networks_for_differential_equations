@@ -11,6 +11,7 @@ from matplotlib import pyplot as plt
 nx = 10
 dx = 1. / nx
 
+
 def A(x):
     """
         Left part of initial equation
@@ -30,7 +31,7 @@ def f(x, psy):
         d(psy)/dx = f(x, psy)
         This is f() function on the right
     """
-    return B(x) - psy * A(x)
+    return x ** 3 + 2. * x + x ** 2 * ((1. + 3. * x ** 2) / (1. + x + x ** 3)) - psy * (x + (1. + 3. * x ** 2) / (1. + x + x ** 3))
 
 
 def psy_analytic(x):
@@ -52,6 +53,7 @@ plt.figure()
 plt.plot(x_space, y_space)
 plt.plot(x_space, psy_fd)
 plt.show()
+
 
 def sigmoid(x):
     return 1 / (1 + np.exp(-x))
