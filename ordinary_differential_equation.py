@@ -7,7 +7,6 @@ from autograd import grad
 import autograd.numpy.random as npr
 from matplotlib import pyplot as plt
 
-
 a = 0
 b = 1
 A = 1.
@@ -23,7 +22,9 @@ def f(x, psi):
     :param psi:
     :return:
     """
-    return x ** 3 + 2. * x + x ** 2 * ((1. + 3. * x ** 2) / (1. + x + x ** 3)) - psi * (x + (1. + 3. * x ** 2) / (1. + x + x ** 3))
+    return x ** 3 + 2. * x + x ** 2 * (
+    (1. + 3. * x ** 2) / (1. + x + x ** 3)) - psi * (
+    x + (1. + 3. * x ** 2) / (1. + x + x ** 3))
 
 
 def psi_analytic(x):

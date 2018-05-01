@@ -1,13 +1,12 @@
 """
 Solution of PDE
-Error: 0.18696873538824116
+Error:
 """
 import autograd.numpy as np
 from autograd import grad, jacobian
 import autograd.numpy.random as npr
 from matplotlib import pyplot as plt
 from matplotlib import cm
-
 
 nx = 10
 ny = 10
@@ -26,7 +25,8 @@ def analytic_solution(x):
     :return:
     """
     return (1 / (np.exp(np.pi) - np.exp(-np.pi))) * \
-           np.sin(np.pi * x[0]) * (np.exp(np.pi * x[1]) - np.exp(-np.pi * x[1]))
+           np.sin(np.pi * x[0]) * (
+           np.exp(np.pi * x[1]) - np.exp(-np.pi * x[1]))
 
 
 # Draw analytical solution
@@ -112,7 +112,8 @@ def loss_function(W, x, y):
             gradient_of_trial_d2x = psy_t_hessian[0][0]
             gradient_of_trial_d2y = psy_t_hessian[1][1]
             func = f(input_point)
-            err_sqr = ((gradient_of_trial_d2x + gradient_of_trial_d2y) - func) ** 2
+            err_sqr = ((gradient_of_trial_d2x + gradient_of_trial_d2y)
+                       - func) ** 2
             loss_sum += err_sqr
     return loss_sum
 

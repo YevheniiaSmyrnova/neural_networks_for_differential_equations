@@ -7,7 +7,6 @@ from autograd import grad
 import autograd.numpy.random as npr
 from matplotlib import pyplot as plt
 
-
 a = 0
 b = 1
 A = 0.
@@ -84,7 +83,7 @@ def loss_function(W, x):
         psi_t = psi_trial(xi, net_out)
         gradient_of_trial = psi_grad(xi, net_out)
         second_gradient_of_trial = psi_grad2(xi, net_out)
-        func = f(xi, psi_t, gradient_of_trial)  # right part function
+        func = f(xi, psi_t, gradient_of_trial)
         err_sqr = (second_gradient_of_trial - func) ** 2
         loss_sum += err_sqr
     return loss_sum
