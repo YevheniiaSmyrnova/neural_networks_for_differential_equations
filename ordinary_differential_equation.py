@@ -81,7 +81,7 @@ def loss_function(W, x):
     Loss function
     :param W:
     :param x:
-    :return:
+    :return: number
     """
     loss_sum = 0.
     for xi in x:
