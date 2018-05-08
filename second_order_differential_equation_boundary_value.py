@@ -1,6 +1,6 @@
 """
 Solution of ODE second order for boundary value
-Error: 0.013614386597526002
+Error: 0.003685685168718363
 """
 import autograd.numpy as np
 from autograd import grad
