@@ -1,5 +1,5 @@
 """
-Solution of ODE second order
+Solution of ODE second order for initial value
 Error: 0.013614386597526002
 """
 import autograd.numpy as np
@@ -17,7 +17,7 @@ dx = 1. / nx
 
 def f(x, psi, dpsi):
     """
-    d2(psi)/dx2 = f(x, dpsi/dx, psi)
+    d2(psi)/dx^2 = f(x, dpsi/dx, psi)
     This is f() function on the right
     :param x:
     :param psi:

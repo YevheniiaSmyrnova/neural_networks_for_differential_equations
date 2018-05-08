@@ -35,15 +35,15 @@ for i, x in enumerate(x_space):
     for j, y in enumerate(y_space):
         surface[i][j] = analytic_solution([x, y])
 fig = plt.figure()
-ax = fig.gca(projection='3d')
+ax = fig.gca(projection="3d")
 X, Y = np.meshgrid(x_space, y_space)
 surf = ax.plot_surface(X, Y, surface, rstride=1, cstride=1, cmap=cm.viridis,
                        linewidth=0, antialiased=False)
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
 ax.set_zlim(0, 2)
-ax.set_xlabel('$x$')
-ax.set_ylabel('$y$')
+ax.set_xlabel("$x$")
+ax.set_ylabel("$y$")
 plt.show()
 
 
@@ -85,7 +85,7 @@ def A(x):
     return x[1] * np.sin(np.pi * x[0])
 
 
-def psy_trial(x, net_out):
+def psi_trial(x, net_out):
     """
     Trial solution
     :param xi:
@@ -108,9 +108,9 @@ def loss_function(W, x, y):
         for yi in y:
             input_point = np.array([xi, yi])
             net_out = neural_network(W, input_point)[0]
-            psy_t_hessian = jacobian(jacobian(psy_trial))(input_point, net_out)
-            gradient_of_trial_d2x = psy_t_hessian[0][0]
-            gradient_of_trial_d2y = psy_t_hessian[1][1]
+            psi_t_hessian = jacobian(jacobian(psi_trial))(input_point, net_out)
+            gradient_of_trial_d2x = psi_t_hessian[0][0]
+            gradient_of_trial_d2y = psi_t_hessian[1][1]
             func = f(input_point)
             err_sqr = ((gradient_of_trial_d2x + gradient_of_trial_d2y)
                        - func) ** 2
@@ -135,19 +135,19 @@ surface2 = np.zeros((ny, nx))
 for i, x in enumerate(x_space):
     for j, y in enumerate(y_space):
         net_outt = neural_network(W, [x, y])[0]
-        surface2[i][j] = psy_trial([x, y], net_outt)
+        surface2[i][j] = psi_trial([x, y], net_outt)
 print surface[2]
 print surface2[2]
 
 # Draw results
 fig = plt.figure()
-ax = fig.gca(projection='3d')
+ax = fig.gca(projection="3d")
 X, Y = np.meshgrid(x_space, y_space)
 surf = ax.plot_surface(X, Y, surface2, rstride=1, cstride=1, cmap=cm.viridis,
                        linewidth=0, antialiased=False)
 ax.set_xlim(0, 1)
 ax.set_ylim(0, 1)
 ax.set_zlim(0, 3)
-ax.set_xlabel('$x$')
-ax.set_ylabel('$y$')
+ax.set_xlabel("$x$")
+ax.set_ylabel("$y$")
 plt.show()
