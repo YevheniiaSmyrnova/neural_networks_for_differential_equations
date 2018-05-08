@@ -1,6 +1,6 @@
 """
 Solution of ODE second order for boundary value
-Error: 0.003685685168718363
+Error: 0.10022156304162144
 """
 import autograd.numpy as np
 from autograd import grad
@@ -10,7 +10,7 @@ from matplotlib import pyplot as plt
 a = 0
 b = 1
 A = 0.
-B = np.exp(-1. / 5.) * np.cos(1.)
+B = np.exp(-1. / 5.) * np.sin(1.)
 nx = 20
 dx = 1. / nx
 
