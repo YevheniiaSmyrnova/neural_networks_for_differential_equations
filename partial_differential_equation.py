@@ -1,12 +1,13 @@
 """
 Solution of PDE
-Error:
+Error: 0.00017073821772579126
 """
 import autograd.numpy as np
 from autograd import grad, jacobian
 import autograd.numpy.random as npr
 from matplotlib import pyplot as plt
 from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
 
 nx = 10
 ny = 10
@@ -34,17 +35,17 @@ surface = np.zeros((ny, nx))
 for i, x in enumerate(x_space):
     for j, y in enumerate(y_space):
         surface[i][j] = analytic_solution([x, y])
-fig = plt.figure()
-ax = fig.gca(projection="3d")
-X, Y = np.meshgrid(x_space, y_space)
-surf = ax.plot_surface(X, Y, surface, rstride=1, cstride=1, cmap=cm.viridis,
-                       linewidth=0, antialiased=False)
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-ax.set_zlim(0, 2)
-ax.set_xlabel("$x$")
-ax.set_ylabel("$y$")
-plt.show()
+# fig = plt.figure()
+# ax = fig.gca(projection="3d")
+# X, Y = np.meshgrid(x_space, y_space)
+# surf = ax.plot_surface(X, Y, surface, rstride=1, cstride=1, cmap=cm.viridis,
+#                        linewidth=0, antialiased=False)
+# ax.set_xlim(0, 1)
+# ax.set_ylim(0, 1)
+# ax.set_zlim(0, 2)
+# ax.set_xlabel("$x$")
+# ax.set_ylabel("$y$")
+# plt.show()
 
 
 def f(x):
@@ -128,16 +129,17 @@ for i in range(50):
     W[0] = W[0] - lmb * loss_grad[0]
     W[1] = W[1] - lmb * loss_grad[1]
 
-print "Error: " + str(loss_function(W, x_space, y_space))
-
 # Results
+error = 0
 surface2 = np.zeros((ny, nx))
 for i, x in enumerate(x_space):
     for j, y in enumerate(y_space):
         net_outt = neural_network(W, [x, y])[0]
         surface2[i][j] = psi_trial([x, y], net_outt)
-print surface[2]
-print surface2[2]
+        error += (surface2[i][j] - analytic_solution([x, y])) ** 2
+error /= len(x_space) * len(y_space)
+
+print "Error: " + str(error)
 
 # Draw results
 fig = plt.figure()
