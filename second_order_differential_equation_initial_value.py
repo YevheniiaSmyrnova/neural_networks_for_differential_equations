@@ -1,6 +1,6 @@
 """
 Solution of ODE second order for initial value
-Error: 0.013614386597526002
+Error: 0.003072762905282212
 """
 import autograd.numpy as np
 from autograd import grad
@@ -105,7 +105,12 @@ for i in range(1000):
 # Results
 res = [psi_trial(xi, neural_network(W, xi)[0][0]) for xi in x_space]
 
-print "Error: " + str(loss_function(W, x_space))
+error = 0
+for i in range(len(x_space)):
+    error += (res[i] - y_space[i]) ** 2
+error /= len(x_space)
+
+print "Error: " + str(error)
 
 # Draw results
 plt.figure()

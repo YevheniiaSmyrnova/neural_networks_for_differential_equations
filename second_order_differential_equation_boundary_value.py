@@ -1,6 +1,6 @@
 """
 Solution of ODE second order for boundary value
-Error: 0.10022156304162144
+Error: 0.0009404982063090823
 """
 import autograd.numpy as np
 from autograd import grad
@@ -105,7 +105,12 @@ for i in range(1000):
 # Results
 res = [psi_trial(xi, neural_network(W, xi)[0][0]) for xi in x_space]
 
-print "Error: " + str(loss_function(W, x_space))
+error = 0
+for i in range(len(x_space)):
+    error += (res[i] - y_space[i]) ** 2
+error /= len(x_space)
+
+print "Error: " + str(error)
 
 # Draw results
 plt.figure()
